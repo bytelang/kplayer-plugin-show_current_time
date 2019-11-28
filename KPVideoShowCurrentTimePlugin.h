@@ -14,17 +14,17 @@
 class KPVideoShowCurrentTimePlugin : public KPPluginAdapter {
 protected:
     void Task() override;
+    bool stop = false;
 public:
     explicit KPVideoShowCurrentTimePlugin(const std::string &identify_name, PluginParams params);
     ~KPVideoShowCurrentTimePlugin() override = default;
+    void KillTask() override;
 };
 
 // slot
 extern "C" {
 __attribute__ ((visibility ("default"))) KPVideoShowCurrentTimePlugin *CreateInstance(PluginParams params);
 }
-
-
 
 
 #endif //KPLAYER_KPVIDEOSHOWCURRENTTIMEPLUGIN_H

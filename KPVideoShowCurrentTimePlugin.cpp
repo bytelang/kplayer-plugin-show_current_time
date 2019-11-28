@@ -60,7 +60,11 @@ void KPVideoShowCurrentTimePlugin::Task() {
             logger->error("无法对plugin option进行设置; error: {}", av_err2str(ret));
             break;
         }
-    } while (true);
+    } while (!stop);
+}
+
+void KPVideoShowCurrentTimePlugin::KillTask() {
+    stop = true;
 }
 
 // slot
