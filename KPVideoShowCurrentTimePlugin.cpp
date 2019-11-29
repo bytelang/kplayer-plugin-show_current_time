@@ -37,6 +37,7 @@ KPVideoShowCurrentTimePlugin::KPVideoShowCurrentTimePlugin(const std::string &id
  * 秒级定时器，一秒延迟之后更新plugin text内容
  * 在plugin可用时会使用单独的子线程开启task，需要主要判断filter_context当前是否可用
  * 在对plugin reload时 filter_context会短暂不可用
+ *
  */
 void KPVideoShowCurrentTimePlugin::Task() {
     do {
@@ -65,6 +66,10 @@ void KPVideoShowCurrentTimePlugin::Task() {
 
 void KPVideoShowCurrentTimePlugin::KillTask() {
     stop = true;
+}
+
+void KPVideoShowCurrentTimePlugin::InitTask() {
+    stop = false;
 }
 
 // slot
