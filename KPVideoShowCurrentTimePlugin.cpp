@@ -58,7 +58,7 @@ void KPVideoShowCurrentTimePlugin::Task() {
 
         int ret = av_opt_set_dict(priv, & dict);
         if (ret < 0) {
-            logger->error("无法对plugin option进行设置; error: {}", av_err2str(ret));
+            logger->error("无法对plugin option进行设置;");
             break;
         }
     } while (!stop);
