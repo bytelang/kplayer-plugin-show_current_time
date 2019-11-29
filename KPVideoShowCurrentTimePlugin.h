@@ -19,6 +19,7 @@ public:
     explicit KPVideoShowCurrentTimePlugin(const std::string &identify_name, PluginParams params);
     ~KPVideoShowCurrentTimePlugin() override = default;
     void KillTask() override;
+    void InitTask() override ;
 };
 
 // slot
