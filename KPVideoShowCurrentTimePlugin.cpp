@@ -73,6 +73,6 @@ void KPVideoShowCurrentTimePlugin::InitTask() {
 }
 
 // slot
-__attribute__ ((visibility ("default"))) KPVideoShowCurrentTimePlugin *CreateInstance(PluginParams params) {
-    return new KPVideoShowCurrentTimePlugin("kplayer", params);
+KPLAYER_PLUGIN_FUNC(KPVideoShowCurrentTimePlugin) {
+        return new KPVideoShowCurrentTimePlugin("kplayer", std::move(params));
 }
