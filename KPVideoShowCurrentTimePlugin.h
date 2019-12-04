@@ -24,7 +24,7 @@ public:
 
 // slot
 extern "C" {
-__attribute__ ((visibility ("default"))) KPVideoShowCurrentTimePlugin *CreateInstance(PluginParams params);
+KPLAYER_PLUGIN_FUNC(KPVideoShowCurrentTimePlugin);
 }
 
 
