@@ -16,10 +16,10 @@ protected:
     void Task() override;
     bool stop = false;
 public:
-    explicit KPVideoShowCurrentTimePlugin(const std::string &identify_name, PluginParams params);
+    explicit KPVideoShowCurrentTimePlugin(const std::string &identify_name, const std::string &filter_name, const KPFilterType &filter_type, PluginParams params);
     ~KPVideoShowCurrentTimePlugin() override = default;
     void KillTask() override;
-    void InitTask() override ;
+    void InitTask() override;
 };
 
 // slot

@@ -8,11 +8,7 @@
 
 #include "KPVideoShowCurrentTimePlugin.h"
 
-KPVideoShowCurrentTimePlugin::KPVideoShowCurrentTimePlugin(const std::string &identify_name, PluginParams params) : KPPluginAdapter(identify_name) {
-    // 赋值信息
-    filter_type = KP_FILTER_TYPE_VIDEO;
-    filter_name = "video_plugin_show_time";
-
+KPVideoShowCurrentTimePlugin::KPVideoShowCurrentTimePlugin(const std::string &identify_name, const std::string &filter_name, const KPFilterType &filter_type, PluginParams params) : KPPluginAdapter(identify_name, filter_name, filter_type) {
     std::string font_size  = "17";
     std::string font_color = "white";
     if (params.find("font_size") != params.end()) {
@@ -24,7 +20,7 @@ KPVideoShowCurrentTimePlugin::KPVideoShowCurrentTimePlugin(const std::string &id
 
     // 赋值described
     std::stringstream filter_desc_stream;
-    filter_desc_stream << "x=10:y=10:fontfile=Res/font.ttf:fontsize=" << font_size << ":fontcolor=" << font_color << ":text='" << "[无]" << "'";
+    filter_desc_stream << "x=10:y=10:fontfile=res/font.ttf:fontsize=" << font_size << ":fontcolor=" << font_color << ":text='" << "[无]" << "'";
     filter_desc = filter_desc_stream.str();
 
     // 查找过滤器
@@ -74,5 +70,5 @@ void KPVideoShowCurrentTimePlugin::InitTask() {
 
 // slot
 KPLAYER_PLUGIN_FUNC(KPVideoShowCurrentTimePlugin) {
-        return new KPVideoShowCurrentTimePlugin("kplayer", std::move(params));
+    return new KPVideoShowCurrentTimePlugin("kplayer", "video_plugin_show_time", KP_FILTER_TYPE_VIDEO, std::move(params));
 }
