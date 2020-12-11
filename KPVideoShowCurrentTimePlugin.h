@@ -10,13 +10,14 @@
 #define KPLAYER_KPVIDEOSHOWCURRENTTIMEPLUGIN_H
 
 #include "adapter/KPPluginAdapter.h"
+#include <utility>
 
 class KPVideoShowCurrentTimePlugin : public KPPluginAdapter {
 protected:
     void Task() override;
     bool stop = false;
 public:
-    explicit KPVideoShowCurrentTimePlugin(const std::string &identify_name, const std::string &filter_name, const KPFilterType &filter_type, PluginParams params);
+    explicit KPVideoShowCurrentTimePlugin(const std::string &identify_name, const std::string &filter_name, const KPFilterType &filter_type, PluginParamsObject plugin_params_object);
     ~KPVideoShowCurrentTimePlugin() override = default;
     void KillTask() override;
     void InitTask() override;

@@ -8,14 +8,14 @@
 
 #include "KPVideoShowCurrentTimePlugin.h"
 
-KPVideoShowCurrentTimePlugin::KPVideoShowCurrentTimePlugin(const std::string &identify_name, const std::string &filter_name, const KPFilterType &filter_type, PluginParams params) : KPPluginAdapter(identify_name, filter_name, filter_type) {
+KPVideoShowCurrentTimePlugin::KPVideoShowCurrentTimePlugin(const std::string &identify_name, const std::string &filter_name, const KPFilterType &filter_type, PluginParamsObject plugin_params_object) : KPPluginAdapter(identify_name, filter_name, filter_type,std::move(plugin_params_object)) {
     std::string font_size  = "17";
     std::string font_color = "white";
-    if (params.find("font_size") != params.end()) {
-        font_size = params["font_size"];
+    if (plugin_params_object.params.find("font_size") != plugin_params_object.params.end()) {
+        font_size = plugin_params_object.params["font_size"];
     }
-    if (params.find("font_color") != params.end()) {
-        font_color = params["font_color"];
+    if (plugin_params_object.params.find("font_color") != plugin_params_object.params.end()) {
+        font_color = plugin_params_object.params["font_color"];
     }
 
     // 赋值described
@@ -70,5 +70,5 @@ void KPVideoShowCurrentTimePlugin::InitTask() {
 
 // slot
 KPLAYER_PLUGIN_FUNC(KPVideoShowCurrentTimePlugin) {
-    return new KPVideoShowCurrentTimePlugin("kplayer", "video_plugin_show_time", KP_FILTER_TYPE_VIDEO, std::move(params));
+    return new KPVideoShowCurrentTimePlugin("kplayer", "video_plugin_show_time", KP_FILTER_TYPE_VIDEO, std::move(plugin_params));
 }
