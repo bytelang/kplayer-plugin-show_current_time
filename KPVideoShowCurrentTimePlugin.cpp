@@ -57,8 +57,8 @@ void KPVideoShowCurrentTimePlugin::Task() {
 
         void *priv = GetFilterPriv();
         if (!priv) {
-            logger->error("无法对plugin option进行设置; error: {}", "priv为空");
-            break;
+            logger->debug("无法对plugin option进行设置; error: {}", "priv为空");
+            continue;
         }
 
         int ret = av_opt_set_dict(priv, & dict);
