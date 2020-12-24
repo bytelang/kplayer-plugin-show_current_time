@@ -46,7 +46,7 @@ KPVideoShowCurrentTimePlugin::KPVideoShowCurrentTimePlugin(const std::string &id
  */
 void KPVideoShowCurrentTimePlugin::Task() {
     do {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::this_thread::sleep_for(std::chrono::microseconds (700));
         AVDictionary *dict = nullptr;
 
         time_t now_time;
