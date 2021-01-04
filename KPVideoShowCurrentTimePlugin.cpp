@@ -46,26 +46,14 @@ KPVideoShowCurrentTimePlugin::KPVideoShowCurrentTimePlugin(const std::string &id
  */
 void KPVideoShowCurrentTimePlugin::Task() {
     do {
-        std::this_thread::sleep_for(std::chrono::microseconds (700));
-        AVDictionary *dict = nullptr;
+        std::this_thread::sleep_for(std::chrono::microseconds(1000));
 
         time_t now_time;
         time(& now_time);
         char str_time[64];
         strftime(str_time, sizeof(str_time), "%Y-%m-%d %H:%M:%S", localtime(& now_time));
-        av_dict_set(& dict, "text", str_time, 0);
 
-        void *priv = GetFilterPriv();
-        if (!priv) {
-            logger->debug("无法对plugin option进行设置; error: {}", "priv为空");
-            continue;
-        }
-
-        int ret = av_opt_set_dict(priv, & dict);
-        if (ret < 0) {
-            logger->error("无法对plugin option进行设置;");
-            break;
-        }
+        SetPluginValue(std::map<std::string, std::string>{{"text", str_time}});
     } while (!stop);
 }
 
@@ -79,5 +67,5 @@ void KPVideoShowCurrentTimePlugin::InitTask() {
 
 // slot
 KPLAYER_PLUGIN_FUNC(KPVideoShowCurrentTimePlugin) {
-    return new KPVideoShowCurrentTimePlugin("kplayer", "video_plugin_show_time", KP_FILTER_TYPE_VIDEO, std::move(plugin_params));
+    return new KPVideoShowCurrentTimePlugin("kplayer", "video_plugin_show_current_time", KP_FILTER_TYPE_VIDEO, std::move(plugin_params));
 }
